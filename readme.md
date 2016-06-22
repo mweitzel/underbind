@@ -1,6 +1,6 @@
 ## underbind
 
-Bind JavaScript objects without conntext
+Bind JavaScript objects without context
 
 ### installation
 
