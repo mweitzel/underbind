@@ -13,7 +13,7 @@ $ npm install underbind
 It works just like bind, but without context parameter
 
 ```
-Function.prototype._bind = require('underbind')
+require('underbind').englobal()
 
 function add() { return Array.prototype.reduce.call(arguments, (a,b) => a+b) }
 
