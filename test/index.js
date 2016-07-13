@@ -1,6 +1,7 @@
 var test = require('tape')
+  , _bind = require('..')
 
-Function.prototype._b = require('..')
+_bind.englobal()
 
 function thisAndArgs() {
   "use strict"
@@ -37,7 +38,7 @@ test('_b can be called before and after bind', function(t) {
   t.end()
 })
 
-function args() { return Array.prototype.slice.call(arguments) }
+function args(...through) { return through }
 
 test('_b does nothing with no args but can still be chained', function(t) {
   t.deepEqual(
@@ -48,5 +49,11 @@ test('_b does nothing with no args but can still be chained', function(t) {
       (9,10)
   , [6,7,8,9,10]
   )
+  t.end()
+})
+
+test('englobal can be called multiple times', function(t) {
+  _bind.englobal()
+  _bind.englobal()
   t.end()
 })

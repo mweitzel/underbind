@@ -1,10 +1,26 @@
-module.exports = _bind
+'use strict'
 
-function _bind() {
-  'use strict'
-  var a = this
-    , args = Array.prototype.slice.call(arguments)
-  return function() {
-    return a.apply(this||a, args.concat(Array.prototype.slice.call(arguments)))
+var once = require('once')
+
+module.exports = partial
+
+function partial(...partialArgs) {
+  var fn = this
+  return function(...calledArgs) {
+    return fn.apply(this, partialArgs.concat(calledArgs))
   }
 }
+
+partial.englobal = once(() => (
+    Object.defineProperty(
+      Function.prototype
+    , '_bind'
+    , { get: function() { return partial.bind(this) } }
+    )
+  , Object.defineProperty(
+      Function.prototype
+    , '_b'
+    , { get: function() { return partial.bind(this) } }
+    )
+  )
+)
